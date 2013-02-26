@@ -40,7 +40,7 @@
     };
     
     self.webViewURLHandler = ^(NSURL *url){
-        NSString *command = request.URL.host.lowercaseString;
+        NSString *command = url.host.lowercaseString;
         if ([command isEqualToString:@"back"]) {
             [self.navigationController popViewControllerAnimated:YES];
         }
