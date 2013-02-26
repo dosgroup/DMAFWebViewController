@@ -20,12 +20,12 @@ It the following features / tweaks:
 2. A loading.gif page is displayed automatically and immediately (`#define LOADING_GIF`, and `self.loadingPage`)
 3. `self.modifyRequest` called before all outgoing requests allowing you to customize requests with a block.
 4. `webView:shouldStartLoadWithRequest:` - contains logic to do the following
-  a) allow loading of self.URL (triggered by `loadData:`)
-  b) all other `http` or `https` urls will be handed to a new `DMAFWebViewController` and pushed onto the `UINavigationController` stack.
-  c) `webview://back` pops the current view controller off the stack.
-  d) will eventually add a customization point for more `webview://` urls.
-  e) all other urls are handed to `self.otherSchemeHandler` for custom logic.
-  c) urls `webview://back` causes the current view controller to pop off the top of the stack.
+    a) allow loading of self.URL (triggered by `loadData:`)
+    b) all other `http` or `https` urls will be handed to a new `DMAFWebViewController` and pushed onto the `UINavigationController` stack.
+    c) `webview://back` pops the current view controller off the stack.
+    d) will eventually add a customization point for more `webview://` urls.
+    e) all other urls are handed to `self.otherSchemeHandler` for custom logic.
+    c) urls `webview://back` causes the current view controller to pop off the top of the stack.
 5. `self.titleTransformer` is called on `document.title`, and the output has whitespace trimmed.
 6. `document.documentElement.style.webkitTouchCallout = "none"` is called to disable the standard long-press menu (copy/open url/add to reading list).
 
