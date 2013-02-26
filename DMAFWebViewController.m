@@ -39,6 +39,14 @@
         [self.navigationController popViewControllerAnimated:YES];
     };
     
+    self.webViewURLHandler = ^(NSURL *url){
+        NSString *command = request.URL.host.lowercaseString;
+        if ([command isEqualToString:@"back"]) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        return NO;
+    };
+    
     return self;
 }
 
@@ -110,13 +118,7 @@
         return YES;
     } else if ([[request.URL scheme] isEqualToString:@"webview"]) {
         // syntax for web view causing things to happen in the app.
-        NSString *command = request.URL.host.lowercaseString;
-        
-        if ([command isEqualToString:@"back"]) {
-            [self.navigationController popViewControllerAnimated:YES];
-        }
-        
-        return NO;
+        return self.webViewURLHandler(request.URL);
     } else if (navigationType == UIWebViewNavigationTypeLinkClicked || navigationType == UIWebViewNavigationTypeOther) { // not my problem, pass it on.
         if ([request.URL.scheme isEqualToString:@"http"] || [request.URL.scheme isEqualToString:@"https"]) {
             DMAFWebViewController *nextController = [[[self class] alloc] initWithURL:request.URL];
