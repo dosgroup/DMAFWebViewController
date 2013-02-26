@@ -34,15 +34,17 @@
         [mutableRequest setValue:@"bootstrap" forHTTPHeaderField:@"User-Agent"];
     };
     
+    __weak __typeof(&*self)weakSelf = self;
+    
     self.loadError = ^(DMWebView *webView, NSError *error, NSURL *url){
         NSLog(@"Failure %@", error);
-        [self.navigationController popViewControllerAnimated:YES];
+        [weakSelf.navigationController popViewControllerAnimated:YES];
     };
     
     self.webViewURLHandler = ^(NSURL *url){
         NSString *command = url.host.lowercaseString;
         if ([command isEqualToString:@"back"]) {
-            [self.navigationController popViewControllerAnimated:YES];
+            [weakSelf.navigationController popViewControllerAnimated:YES];
         }
         return NO;
     };
@@ -69,9 +71,10 @@
 }
 
 -(void)loadView {
-    self.view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.view = [[UIView alloc] initWithFrame:CGRectZero];
+    self.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     self.webView = [[DMWebView alloc] initWithFrame:self.view.bounds];
-    self.webView.autoresizingMask = UIViewAutoresizingFlexibleHeight + UIViewAutoresizingFlexibleWidth;
+    self.webView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     self.webView.delegate = self;
     [self.view addSubview:self.webView];
 }
