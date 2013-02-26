@@ -25,7 +25,7 @@
     
     self.URL = url;
     self.otherSchemeHandler = ^(NSURL *url){
-        NSLog(@"default otherSchemeHandler called for url %@", url);
+        //NSLog(@"default otherSchemeHandler called for url %@", url);
         [[UIApplication sharedApplication] openURL:url];
     };
     self.loadingPage = [NSString stringWithFormat:@"<html><body style=\"text-align: center;\"><br><br><br><br><img src=\"%@\"></body></html>", LOADING_GIF];
@@ -65,7 +65,7 @@
     [self.webView loadHTMLString:self.loadingPage baseURL:[NSURL URLWithString:@"about:blank"]];
     [self startLoadingRequest:[NSURLRequest requestWithURL:self.URL]];
     //[self.webView loadRequest:[NSURLRequest requestWithURL:self.URL]];
-    NSLog(@"viewDidLoad");
+    //NSLog(@"viewDidLoad");
 }
 
 -(void)loadView {
@@ -100,7 +100,7 @@
     AFHTTPRequestOperation *httpRequstOperation = [[AFHTTPRequestOperation alloc] initWithRequest:mutable];
     
     [httpRequstOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"Success %@", mutable.URL);
+        //NSLog(@"Success %@", mutable.URL);
         [_webView loadData:responseObject MIMEType:[operation.response MIMEType] textEncodingName:[operation.response textEncodingName] baseURL:mutable.URL];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         self.loadError(_webView, error, mutable.URL);
@@ -112,7 +112,7 @@
 #pragma mark - UIWebView delegate methods
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    NSLog(@"Should load %@ - %i", request, navigationType);
+    //NSLog(@"Should load %@ - %i", request, navigationType);
     
     if ([request.URL isEqual:self.URL] || [request.URL.scheme isEqualToString:@"about"])  {// it's my own damn request.
         return YES;
