@@ -13,11 +13,11 @@ It has the following features / tweaks:
 1. All network activity is mediated by AFNetworking.
 2. `self.modifyRequest` called before all outgoing requests allowing you to customize requests with a block.
 3. A loading.gif page is displayed automatically and immediately (`#define LOADING_GIF`, and `self.loadingPage`)
-4. `webView:shouldStartLoadWithRequest:` new page flow control:
-    a) allow loading of self.URL (triggered by `loadData:`)
-    b) all other `http` or `https` urls will be handed to a new `DMAFWebViewController` and pushed onto the `UINavigationController` stack.
-    c) `webview://back` pops the current view controller off the stack.
-    d) all other urls are handed to `self.otherSchemeHandler` for custom logic.
+4. Page flow control via `webView:shouldStartLoadWithRequest:`
+    - allow loading of self.URL (triggered by `loadData:`)
+    - all other `http` or `https` urls will be handed to a new `DMAFWebViewController` and pushed onto the `UINavigationController` stack.
+    - `webview://back` pops the current view controller off the stack.
+    - all other urls are handed to `self.otherSchemeHandler` for custom logic.
 5. DOM Manipulation - `self.titleTransformer` is called (via js) on `document.title`, and the output has whitespace trimmed.
 6. DOM Manipulation - `document.documentElement.style.webkitTouchCallout = "none"` is called (via js) to disable the standard long-press menu (copy/open url/add to reading list).
 
