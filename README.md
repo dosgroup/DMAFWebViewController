@@ -6,13 +6,7 @@ Inspired in part by [Anne Halsall](http://twitter.com/annekate)'s appearance on 
 
 It is not an attempt to make a full-featured HTML5 app development environemnt, like PhoneGap or Titanium, rather it is a simple view you can use for single-screens of web content. It is intended to be placed in a UINavigationController.
 
-It the following features / tweaks: 
-
-## DMWebView
-
-1. `setup` - self.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal;
-2. `setup` - make the background white.
-3. `layoutSubviews` - remove the linen that is behind the web view.
+It has the following features / tweaks: 
 
 ## DMAFWebViewController
 
@@ -28,6 +22,12 @@ It the following features / tweaks:
     c) urls `webview://back` causes the current view controller to pop off the top of the stack.
 5. `self.titleTransformer` is called on `document.title`, and the output has whitespace trimmed.
 6. `document.documentElement.style.webkitTouchCallout = "none"` is called to disable the standard long-press menu (copy/open url/add to reading list).
+
+## DMWebView
+
+1. `setup` - self.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal;
+2. `setup` - make the background white.
+3. `layoutSubviews` - remove the linen that is behind the web view.
 
 My philosophy is that these tweaks should, for the most part, be optional, but with sensible defaults. To that end, all the blocks (`self.otherSchemeHandler`, `self.titleTransformer`) have defaults set in `-init`. There is still some work to do making these tweaks optional and inserting customization blocks, but that's the goal.
 
