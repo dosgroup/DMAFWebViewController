@@ -55,14 +55,14 @@
     [super viewDidLoad];
     
     /*
-    self.navigationController.navigationBar.translucent = YES;
-    self.navigationController.navigationBar.opaque = YES;
-    self.navigationController.navigationBar.tintColor = [UIColor clearColor];
-    self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
+     self.navigationController.navigationBar.translucent = YES;
+     self.navigationController.navigationBar.opaque = YES;
+     self.navigationController.navigationBar.tintColor = [UIColor clearColor];
+     self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
      */
     
 	// Do any additional setup after loading the view.
-    [self.webView loadHTMLString:self.loadingPage baseURL:nil];
+    [self.webView loadHTMLString:self.loadingPage baseURL:[NSURL URLWithString:@"about:blank"]];
     [self startLoadingRequest:[NSURLRequest requestWithURL:self.URL]];
     //[self.webView loadRequest:[NSURLRequest requestWithURL:self.URL]];
     NSLog(@"viewDidLoad");
@@ -96,7 +96,7 @@
     //[mutable setCachePolicy:NSURLRequestReloadIgnoringCacheData];
     
     self.modifyRequest(mutable);
-
+    
     AFHTTPRequestOperation *httpRequstOperation = [[AFHTTPRequestOperation alloc] initWithRequest:mutable];
     
     [httpRequstOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -114,7 +114,7 @@
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     NSLog(@"Should load %@ - %i", request, navigationType);
     
-    if ([request.URL isEqual:self.URL])  {// it's my own damn request.
+    if ([request.URL isEqual:self.URL] || [request.URL.scheme isEqualToString:@"about"])  {// it's my own damn request.
         return YES;
     } else if ([[request.URL scheme] isEqualToString:@"webview"]) {
         // syntax for web view causing things to happen in the app.
@@ -145,11 +145,6 @@
     
     // disable the long-press callout
     [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitTouchCallout = \"none\";"];
-}
-
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    self.loadError(webView, error, _URL);
-    //NSLog(@"webView:%@ didFailLoadWithError:%@", webView, error);
 }
 
 @end
