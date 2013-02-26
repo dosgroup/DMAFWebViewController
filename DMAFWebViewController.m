@@ -28,7 +28,7 @@
         //NSLog(@"default otherSchemeHandler called for url %@", url);
         [[UIApplication sharedApplication] openURL:url];
     };
-    self.loadingPage = [NSString stringWithFormat:@"<html><body style=\"text-align: center;\"><br><br><br><br><img src=\"%@\"><br><br><br><br><h3><a href=\"webview://back\" style=\"color: #f8f8f8;\">Cancel</a></h3></body></html>", LOADING_GIF];
+    self.loadingPage = [NSString stringWithFormat:@"<html><body style=\"text-align: center;\"><br><br><br><br><img src=\"%@\"><br><br><br><br><h3><a href=\"webview://back\" style=\"color: #888;\">Cancel</a></h3></body></html>", LOADING_GIF];
     
     self.modifyRequest = ^(NSMutableURLRequest *mutableRequest){
         [mutableRequest setValue:@"bootstrap" forHTTPHeaderField:@"User-Agent"];
