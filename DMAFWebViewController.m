@@ -34,6 +34,11 @@
         [mutableRequest setValue:@"bootstrap" forHTTPHeaderField:@"User-Agent"];
     };
     
+    self.loadError = ^(DMWebView *webView, NSError *error, NSURL *url){
+        NSLog(@"Failure %@", error);
+        [self.navigationController popViewControllerAnimated:YES];
+    };
+    
     return self;
 }
 
@@ -90,8 +95,7 @@
         NSLog(@"Success %@", mutable.URL);
         [_webView loadData:responseObject MIMEType:[operation.response MIMEType] textEncodingName:[operation.response textEncodingName] baseURL:mutable.URL];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Failure %@", error);
-        [self.navigationController popViewControllerAnimated:YES];
+        self.loadError(_webView, error, mutable.URL);
     }];
     
     [httpRequstOperation start];
@@ -142,6 +146,7 @@
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    self.loadError(webView, error, _URL);
     //NSLog(@"webView:%@ didFailLoadWithError:%@", webView, error);
 }
 

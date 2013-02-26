@@ -22,6 +22,8 @@
 
 @property (strong, nonatomic) void(^modifyRequest)(NSMutableURLRequest *url);
 
+@property (strong, nonatomic) void(^loadError)(DMWebView *webView, NSError *error, NSURL *url);
+
 @property (strong, nonatomic) NSString *loadingPage;
 
 -(id)initWithURL:(NSURL *)url;
