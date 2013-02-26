@@ -115,7 +115,7 @@
         return NO;
     } else if (navigationType == UIWebViewNavigationTypeLinkClicked || navigationType == UIWebViewNavigationTypeOther) { // not my problem, pass it on.
         if ([request.URL.scheme isEqualToString:@"http"] || [request.URL.scheme isEqualToString:@"https"]) {
-            DMAFWebViewController *nextController = [[self class] alloc] initWithURL:request.URL];
+            DMAFWebViewController *nextController = [[[self class] alloc] initWithURL:request.URL];
             nextController.titleTransformer = self.titleTransformer;
             [self.navigationController pushViewController:nextController animated:YES];
             return NO;

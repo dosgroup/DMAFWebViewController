@@ -20,7 +20,7 @@
 
 @property (strong, nonatomic) void(^otherSchemeHandler)(NSURL *url);
 
-@property (strong, nonatomic) void(^mutableRequest)(NSMutableURLRequest *url);
+@property (strong, nonatomic) void(^modifyRequest)(NSMutableURLRequest *url);
 
 @property (strong, nonatomic) NSString *loadingPage;
 
