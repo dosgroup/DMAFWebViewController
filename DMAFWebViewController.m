@@ -45,6 +45,8 @@
         NSString *command = url.host.lowercaseString;
         if ([command isEqualToString:@"back"]) {
             [weakSelf.navigationController popViewControllerAnimated:YES];
+        } else {
+            NSLog(@"Unhandled webViewURL %@", url);
         }
         return NO;
     };
