@@ -33,8 +33,12 @@
     self.modifyRequest = ^(NSMutableURLRequest *mutableRequest){
         [mutableRequest setValue:@"bootstrap" forHTTPHeaderField:@"User-Agent"];
     };
-    
-    __weak __typeof(&*self)weakSelf = self;
+   
+    #if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_5_0
+        __unsafe_unretained __typeof(&*self)weakSelf = self; // 4.3
+    #else
+        __weak __typeof(&*self)weakSelf = self; // 5.0 +
+    #endif 
     
     self.loadError = ^(DMWebView *webView, NSError *error, NSURL *url){
         NSLog(@"Failure %@", error);
