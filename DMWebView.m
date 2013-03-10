@@ -16,19 +16,25 @@
 }
 
 -(void)setup {
-    [self.scrollView setDelaysContentTouches:NO];
-    self.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal;
+    if ([self respondsToSelector:@selector(scrollView)]) {
+        UIScrollView *scrollView = [self scrollView];
+        [scrollView setDelaysContentTouches:NO];
+        scrollView.decelerationRate = UIScrollViewDecelerationRateNormal;
+    }
     self.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)layoutSubviews {
-	[super layoutSubviews];
-    		
-    for (UIView *subview in self.scrollView.subviews) {
-        if ([subview isKindOfClass:[UIImageView class]]) {
-            subview.hidden = YES;
+    [super layoutSubviews];
+    if ([self respondsToSelector:@selector(scrollView)]) {
+        for (UIView *subview in self.scrollView.subviews) {
+            if ([subview isKindOfClass:[UIImageView class]]) {
+                subview.hidden = YES;
+            }
         }
     }
 }
+
+
 
 @end
