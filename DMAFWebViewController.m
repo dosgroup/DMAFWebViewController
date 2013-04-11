@@ -40,9 +40,11 @@
         __weak __typeof(&*self)weakSelf = self; // 5.0 +
     #endif 
     
-    self.loadError = ^(DMWebView *webView, NSError *error, NSURL *url){
-        NSLog(@"Failure %@", error);
-        [weakSelf.navigationController popViewControllerAnimated:YES];
+    self.completion = ^(DMWebView *webView, NSError *error, NSURLRequest *request, NSURLResponse *response, NSData *data){
+        NSLog(@"Completion %@ : %@", request.URL ,error);
+        if (error) {
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+        }
     };
     
     self.webViewURLHandler = ^(NSURL *url){
@@ -111,8 +113,9 @@
     [httpRequstOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         //NSLog(@"Success %@", mutable.URL);
         [_webView loadData:responseObject MIMEType:[operation.response MIMEType] textEncodingName:[operation.response textEncodingName] baseURL:mutable.URL];
+        if (self.completion) self.completion(_webView, nil, mutable, operation.response, responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        self.loadError(_webView, error, mutable.URL);
+        if (self.completion) self.completion(_webView, error, mutable, operation.response, nil);
     }];
     
     [httpRequstOperation start];

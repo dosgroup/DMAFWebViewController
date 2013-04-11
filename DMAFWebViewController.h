@@ -22,7 +22,7 @@
 
 @property (strong, nonatomic) void(^modifyRequest)(NSMutableURLRequest *url);
 
-@property (strong, nonatomic) void(^loadError)(DMWebView *webView, NSError *error, NSURL *url);
+@property (strong, nonatomic) void(^completion)(DMWebView *webView, NSError *error, NSURLRequest *request, NSURLResponse *response, NSData *responseData);
 
 @property (strong, nonatomic) BOOL(^webViewURLHandler)(NSURL *url);
 
