@@ -29,5 +29,6 @@
 @property (strong, nonatomic) NSString *loadingPage;
 
 -(id)initWithURL:(NSURL *)url;
+-(void)startLoadingRequest:(NSURLRequest*)request;
 
 @end
