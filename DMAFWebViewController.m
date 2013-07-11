@@ -58,11 +58,11 @@
     };
     
     self.httpHttpsHandler = ^(NSURL *url, UINavigationController *navController) {
-        DMAFWebViewController *nextController = [[[self class] alloc] initWithURL:request.URL];
-        nextController.titleTransformer = self.titleTransformer;
+        DMAFWebViewController *nextController = [[[weakSelf class] alloc] initWithURL:url];
+        nextController.titleTransformer = weakSelf.titleTransformer;
         [navController pushViewController:nextController animated:YES];
         return NO;
-    }
+    };
     
     return self;
 }
