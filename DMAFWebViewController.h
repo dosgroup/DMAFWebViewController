@@ -20,6 +20,8 @@
 
 @property (strong, nonatomic) void(^otherSchemeHandler)(NSURL *url);
 
+@property (strong, nonatomic) void(^httpHttpsHandler)(NSURL *url, UINavigationController *navController); // navController is the controller that will be pushed any new view.
+
 @property (strong, nonatomic) void(^modifyRequest)(NSMutableURLRequest *url);
 
 @property (strong, nonatomic) void(^completion)(DMWebView *webView, NSError *error, NSURLRequest *request, NSURLResponse *response, NSData *responseData);

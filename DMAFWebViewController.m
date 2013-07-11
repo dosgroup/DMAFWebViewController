@@ -57,6 +57,13 @@
         return NO;
     };
     
+    self.httpHttpsHandler = ^(NSURL *url, UINavigationController *navController) {
+        DMAFWebViewController *nextController = [[[self class] alloc] initWithURL:request.URL];
+        nextController.titleTransformer = self.titleTransformer;
+        [navController pushViewController:nextController animated:YES];
+        return NO;
+    }
+    
     return self;
 }
 
@@ -133,10 +140,7 @@
         return self.webViewURLHandler(request.URL);
     } else if (navigationType == UIWebViewNavigationTypeLinkClicked || navigationType == UIWebViewNavigationTypeOther) { // not my problem, pass it on.
         if ([request.URL.scheme isEqualToString:@"http"] || [request.URL.scheme isEqualToString:@"https"]) {
-            DMAFWebViewController *nextController = [[[self class] alloc] initWithURL:request.URL];
-            nextController.titleTransformer = self.titleTransformer;
-            [self.navigationController pushViewController:nextController animated:YES];
-            return NO;
+            return self.httpHttpsHandler(request.URL, self.navigationController);
         } else {
             self.otherSchemeHandler(request.URL);
         }
