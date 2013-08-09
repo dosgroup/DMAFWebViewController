@@ -103,7 +103,7 @@
 #pragma mark - Networking
 
 -(void)startLoadingRequest:(NSURLRequest *)request {
-    _block NSMutableURLRequest *mutable = nil;
+    __block NSMutableURLRequest *mutable = nil;
     
     if ([request isKindOfClass:[NSMutableURLRequest class]]) {
         mutable = (NSMutableURLRequest *)request;
