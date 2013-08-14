@@ -86,7 +86,9 @@
 }
 
 -(void)loadView {
-    self.view = [[UIView alloc] initWithFrame:CGRectZero];
+    CGRect appFrame = [[UIScreen mainScreen] applicationFrame];
+    CGRect frame = (CGRect){.origin = appFrame.origin, .size.width = appFrame.size.width, .size.height = appFrame.size.height - self.navigationController.navigationBar.frame.size.height};
+    self.view = [[UIView alloc] initWithFrame:frame];
     self.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     self.webView = [[DMWebView alloc] initWithFrame:self.view.bounds];
     self.webView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
