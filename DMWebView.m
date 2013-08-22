@@ -37,6 +37,11 @@
             }
         }
     }
+    
+    if (!objc_getAssociatedObject(self.scrollView, "associated_height")) {
+        NSValue *value = [NSValue valueWithCGSize:self.scrollView.contentSize];
+        [self observeValueForKeyPath:@"contentSize" ofObject:self.scrollView change:@{NSKeyValueChangeNewKey : value} context:nil];
+    }
 }
 
 
