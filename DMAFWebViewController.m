@@ -90,7 +90,16 @@
     CGRect frame = (CGRect){.origin = appFrame.origin, .size.width = appFrame.size.width, .size.height = appFrame.size.height - self.navigationController.navigationBar.frame.size.height};
     self.view = [[UIView alloc] initWithFrame:frame];
     self.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    self.webView = [[DMWebView alloc] initWithFrame:self.view.bounds];
+    
+    CGRect webViewFrame = self.view.bounds;
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+        // iOS 6.1
+    } else { // iOS 7
+        webViewFrame.origin += 20;
+        webViewFrame.height -= 20;
+    }
+    
+    self.webView = [[DMWebView alloc] initWithFrame:webViewFrame];
     self.webView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     self.webView.delegate = self;
     [self.view addSubview:self.webView];
