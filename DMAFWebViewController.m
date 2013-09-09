@@ -95,8 +95,8 @@
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
         // iOS 6.1
     } else { // iOS 7
-        webViewFrame.origin.y += 20;
-        webViewFrame.size.height -= 20;
+        webViewFrame.origin.y += 20.0f;
+        webViewFrame.size.height -= 20.0f;
     }
     
     self.webView = [[DMWebView alloc] initWithFrame:webViewFrame];
