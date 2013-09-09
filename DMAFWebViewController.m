@@ -77,7 +77,7 @@
      self.navigationController.navigationBar.tintColor = [UIColor clearColor];
      self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
      */
-    
+     
 	// Do any additional setup after loading the view.
     [self.webView loadHTMLString:self.loadingPage baseURL:[NSURL URLWithString:@"about:blank"]];
     [self startLoadingRequest:[NSURLRequest requestWithURL:self.URL]];
@@ -95,8 +95,8 @@
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
         // iOS 6.1
     } else { // iOS 7
-        webViewFrame.origin += 20;
-        webViewFrame.height -= 20;
+        webViewFrame.origin.y += 20;
+        webViewFrame.size.height -= 20;
     }
     
     self.webView = [[DMWebView alloc] initWithFrame:webViewFrame];
