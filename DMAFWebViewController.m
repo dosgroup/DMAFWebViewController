@@ -22,6 +22,11 @@
 
 -(id)initWithURL:(NSURL *)url {
     if (!(self = [super initWithNibName:nil bundle:nil])) return self;
+    [self configWithURL:url];
+    return self;
+}
+
+-(void)configWithURL:(NSURL *)url {
     
     self.URL = url;
     self.otherSchemeHandler = ^(NSURL *url){
@@ -63,8 +68,6 @@
         [navController pushViewController:nextController animated:YES];
         return NO;
     };
-    
-    return self;
 }
 
 - (void)viewDidLoad
