@@ -4,6 +4,6 @@ Pod::Spec.new do |s|
   s.platform = :ios, '4.3'
   s.source = {:git => 'https://github.com/coryalder/DMAFWebViewController.git'}
   s.source_files = 'DMAFWebViewController.{h,m}', 'DMWebView.{h,m}'
-  s.dependency 'AFNetworking', '0.10.1'
+  s.dependency 'AFNetworking', '1.3.4'
   s.requires_arc = true
 end
